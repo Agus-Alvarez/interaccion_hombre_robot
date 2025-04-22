@@ -1,0 +1,32 @@
+topic: ~falta_o_no()
+language: fr
+
+concept:(respuesta_falta) [ oui | si | falta | creo que es falta ]
+concept:(respuesta_no_falta) [ non | no | no falta | creo que no es falta ]
+
+u:(hola) ^start(FaltaONoService.iniciar_juego)
+
+u:(¿es falta?) $respuesta_falta
+    ^call(FaltaONoService.verificar_respuesta, "falta")
+
+u:(¿no es falta?) $respuesta_no_falta
+    ^call(FaltaONoService.verificar_respuesta, "no falta")
+
+u:(creo que es falta)
+    ^call(FaltaONoService.verificar_respuesta, "falta")
+
+u:(creo que no es falta)
+    ^call(FaltaONoService.verificar_respuesta, "no falta")
+
+u:(otra)
+    ^call(FaltaONoService.mostrar_imagen)
+
+u:(no quiero jugar más)
+    ^call(FaltaONoService.finalizar_juego) ^say(¡Gracias por jugar!)
+    ^end(falta_o_no)
+
+u:(adiós)
+    ^call(FaltaONoService.finalizar_juego) ^say(¡Hasta luego!)
+    ^end(falta_o_no)
+
+fallback:^rand( ^say(No entiendo tu respuesta. ¿Es falta o no?) ^say(¿Podrías repetir si crees que es falta o no?) )

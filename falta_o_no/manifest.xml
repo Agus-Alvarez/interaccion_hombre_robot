@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<package uuid="b6d0ead9-50dc-43fc-99a5-90e50a361c26">
+ <name>falta_o_no</name>
+ <version>1.0.0</version>
+ <authors>
+  <author>Tu Nombre</author>
+ </authors>
+ <description>Mini proyecto para identificar faltas en el fútbol.</description>
+ <requires>
+  <naoqi version="2.5"/>
+ </requires>
+ <contents>
+  <behavior content="behavior_1/behavior.xar"/>
+  <service class="FaltaONoService" src="src/falta_o_no_service.py" language="python" />
+  <dialog topic="falta_o_no_topico.top" language="fr_FR" />
+  <file content="html/entrada limpia.jpg" />
+  <file content="html/mano.jpeg" />
+  <file content="html/patada.jpg" />
+  <file content="html/patadados.jpeg" />
+ </contents>
+</package>

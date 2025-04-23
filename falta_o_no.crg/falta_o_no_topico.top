@@ -1,0 +1,41 @@
+topic: ~falta_o_no_juego()
+language: fr_FR
+
+concept:(respuesta_falta) [ oui | si | falta | creo que es falta | je pense que c'est une faute | c'est une faute ]
+concept:(respuesta_no_falta) [ non | no | no falta | creo que no es falta | je pense que ce n'est pas une faute | ce n'est pas une faute ]
+
+# u:(hola) ^call(FaltaONoService.iniciar_juego)  
+
+u:(¿es falta?) $respuesta_falta
+    ^call(FaltaONoService.verificar_respuesta, "falta")
+
+u:(¿no es falta?) $respuesta_no_falta
+    ^call(FaltaONoService.verificar_respuesta, "no falta")
+
+u:(creo que es falta) $respuesta_falta
+    ^call(FaltaONoService.verificar_respuesta, "falta")
+
+u:(creo que no es falta) $respuesta_no_falta
+    ^call(FaltaONoService.verificar_respuesta, "no falta")
+
+u:(je pense que c'est une faute) $respuesta_falta
+    ^call(FaltaONoService.verificar_respuesta, "falta")
+
+u:(je pense que ce n'est pas une faute) $respuesta_no_falta
+    ^call(FaltaONoService.verificar_respuesta, "no falta")
+
+u:(otra)
+    ^call(FaltaONoService.mostrar_imagen)
+
+u:(siguiente)
+    ^call(FaltaONoService.mostrar_imagen)
+
+u:(no quiero jugar más)
+    ^call(FaltaONoService.finalizar_juego) ^say("Merci d'avoir joué !")
+    #  ^end(juego_faltas)  #  Esto termina el Behavior, no el servicio
+
+u:(adiós)
+    ^call(FaltaONoService.finalizar_juego) ^say("Au revoir !")
+    #  ^end(juego_faltas)  #  Esto termina el Behavior, no el servicio
+
+fallback:^rand( ^say("Je n'ai pas compris votre réponse. C'est une faute ou pas ?") ^say("Pourriez-vous répéter si vous pensez que c'est une faute ou non ?") )
